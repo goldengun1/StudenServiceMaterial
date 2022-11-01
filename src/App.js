@@ -5,6 +5,9 @@ import Header from "./components/ui/Header";
 import { useState } from "react";
 import StudiesPage from "./pages/StudiesPage";
 import Footer from "./components/ui/Footer";
+import LoginPage from "./pages/LoginPage";
+import {CssBaseline} from "@material-ui/core";
+import HomePage from "./pages/HomePage";
 
 const App = () => {
   const [tabsValue, setTabsValue] = useState(0);
@@ -12,11 +15,15 @@ const App = () => {
 
   return (
     <ThemeProvider theme={theme}>
+      <CssBaseline/>
       <BrowserRouter>
         <Header tabsValue={tabsValue} setTabsValue={setTabsValue} selectedIndex={selectedIndex} setSelectedIndex={setSelectedIndex} />
         <Switch>
           <Route exact path="/">
-            <h1 style={{marginBottom: "500px"}}>HOME PAGE</h1>
+            <HomePage/>
+          </Route>
+          <Route exact path="/login">
+            <LoginPage/>
           </Route>
           <Route path="/studies">
             <StudiesPage/>

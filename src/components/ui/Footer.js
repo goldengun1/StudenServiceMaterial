@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
   mainContainer: {
     position: "absolute",
     display: "flex",
-    height: "100%",
+    // height: "100%",
     marginTop: "4rem",
   },
   gridItem: {

@@ -38,7 +38,7 @@ function ElevationScroll(props) {
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
-    // zIndex: theme.zIndex.modal + 1,
+    zIndex: theme.zIndex.modal + 1,
     height: "8rem",
     [theme.breakpoints.down("md")]: {
       height: "6rem",
@@ -100,31 +100,31 @@ const useStyles = makeStyles((theme) => ({
     },
     getContentAnchorEl: null,
   },
-  drawer:{
+  drawer: {
     backgroundColor: theme.palette.primary.main,
     minWidth: "20rem",
-    [theme.breakpoints.down('xs')]:{
+    [theme.breakpoints.down("xs")]: {
       width: "100%",
-    }
+    },
   },
-  drawerItem:{
+  drawerItem: {
     ...theme.typography.tab,
     color: "white",
     opacity: "0.7",
-    fontFamily:"Aldrich",
+    fontFamily: "Aldrich",
     "&:hover": {
       opacity: 1,
       backgroundColor: "rgba(170,255,255,0.34)",
     },
-    [theme.breakpoints.down('xs')]:{
+    [theme.breakpoints.down("xs")]: {
       textAlign: "center",
-    }
+    },
   },
   drawerItemSelected: {
     opacity: 1,
     backgroundColor: theme.palette.secondary.main,
   },
-  drawerIconContainer:{
+  drawerIconContainer: {
     marginLeft: "auto",
     marginTop: "10px",
   },
@@ -144,6 +144,7 @@ const Header = (props) => {
   const theme = useTheme();
   const matchesMD = useMediaQuery(theme.breakpoints.down("md"));
   const { tabsValue, setTabsValue, selectedIndex, setSelectedIndex } = props;
+  const iOS = window && /iPad|iPhone|iPod/.test(navigator.userAgent);
 
   //HANDLERS
   const openMenuHandler = (event) => {
@@ -200,7 +201,6 @@ const Header = (props) => {
         break;
       default:
         console.log(`ERROR PATH: ${path}`);
-        setTabsValue(null);
         break;
     }
   }, [setSelectedIndex, setTabsValue]);
@@ -216,7 +216,8 @@ const Header = (props) => {
           setDrawerIsOpen(true);
         }}
         open={drawerIsOpen}
-        classes={{paper: classes.drawer}}
+        classes={{ paper: classes.drawer }}
+        disableBackdropTransition={!iOS} disableDiscovery={iOS}
       >
         <div className={classes.toolbarMargin} />
         <List>
@@ -291,7 +292,10 @@ const Header = (props) => {
           </ListItem>
         </List>
       </SwipeableDrawer>
-      <IconButton onClick={() => setDrawerIsOpen((prev) => !prev)} className={classes.drawerIconContainer}>
+      <IconButton
+        onClick={() => setDrawerIsOpen((prev) => !prev)}
+        className={classes.drawerIconContainer}
+      >
         <MenuIcon className={classes.drawerIcon} />
       </IconButton>
     </Fragment>
