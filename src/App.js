@@ -8,6 +8,7 @@ import Footer from "./components/ui/Footer";
 import LoginPage from "./pages/LoginPage";
 import {CssBaseline} from "@material-ui/core";
 import HomePage from "./pages/HomePage";
+import SupportPage from "./pages/SupportPage";
 
 const App = () => {
   const [tabsValue, setTabsValue] = useState(0);
@@ -20,7 +21,7 @@ const App = () => {
         <Header tabsValue={tabsValue} setTabsValue={setTabsValue} selectedIndex={selectedIndex} setSelectedIndex={setSelectedIndex} />
         <Switch>
           <Route exact path="/">
-            <HomePage/>
+            <HomePage setTabsValue={setTabsValue} setSelectedIndex={setSelectedIndex}/>
           </Route>
           <Route exact path="/login">
             <LoginPage/>
@@ -38,7 +39,7 @@ const App = () => {
             <h1>PROFILE PAGE</h1>
           </Route>
           <Route path="/support">
-            <h1>SUPPORT PAGE</h1>
+            <SupportPage/>
           </Route>
         </Switch>
         <Footer setTabsValue={setTabsValue} setSelectedIndex={setSelectedIndex}/>
