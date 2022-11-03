@@ -37,7 +37,8 @@ export default createMuiTheme({
       fontFamily: "Aldrich"
     },
     body1:{
-      fontFamily: "Aldrich"
+      fontFamily: "Aldrich",
+      color: "white"
     },
     body2:{
       fontFamily: "Aldrich",

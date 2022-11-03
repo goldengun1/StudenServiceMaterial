@@ -9,6 +9,7 @@ import LoginPage from "./pages/LoginPage";
 import {CssBaseline} from "@material-ui/core";
 import HomePage from "./pages/HomePage";
 import SupportPage from "./pages/SupportPage";
+import ProfilePage from "./pages/ProfilePage";
 
 const App = () => {
   const [tabsValue, setTabsValue] = useState(0);
@@ -36,7 +37,7 @@ const App = () => {
             <h1>COURSES PAGE</h1>
           </Route>
           <Route path="/profile">
-            <h1>PROFILE PAGE</h1>
+            <ProfilePage/>
           </Route>
           <Route path="/support">
             <SupportPage/>

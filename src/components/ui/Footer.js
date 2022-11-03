@@ -161,7 +161,7 @@ const Footer = (props) => {
                 item
                 component={"a"}
                 className={classes.link}
-                href="http://github.com/goldengun1/Student_Service"
+                href="https://github.com/goldengun1/StudenServiceMaterial"
                 rel="noopener noreferrer"
                 target="blank"
               >
