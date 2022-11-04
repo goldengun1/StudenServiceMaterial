@@ -41,6 +41,9 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: "30rem",
     maxHeight: "30rem",
     marginTop: "5rem",
+    [theme.breakpoints.down("xs")]:{
+      marginTop: 0,
+    },
   },
   btn: {
     width: "15rem",
