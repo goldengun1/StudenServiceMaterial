@@ -38,6 +38,7 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: "30rem",
     marginLeft: "10rem",
     marginTop: "5rem",
+    marginBottom: "5rem",
     [theme.breakpoints.down("md")]: {
       maxHeight: "30rem",
       maxWidth: "30rem",
@@ -51,7 +52,7 @@ const HomePage = (props) => {
   const { setTabsValue } = props;
   const classes = useStyles();
   const colors = theme.palette.common;
-  const SelfWritingText = "This is where the studying starts...";
+  const SelfWritingText = "This is where studying starts...";
   const matchesMD = useMediaQuery(theme.breakpoints.down("md"));
   const matchesXS = useMediaQuery(theme.breakpoints.down("xs"));
 
