@@ -1,7 +1,6 @@
 import { makeStyles } from "@material-ui/core/styles";
-import {Button, Grid, TextField, Typography, useMediaQuery} from "@material-ui/core";
+import {Button, Grid, TextField, Typography} from "@material-ui/core";
 import background from "../assets/images/support_bacground.jpg";
-import theme from "../components/ui/Theme";
 import emailIcon from "../assets/icons/email.svg";
 import phoneIcon from "../assets/icons/phone.svg";
 import paperPlaneIcon from "../assets/icons/send.svg";
@@ -47,9 +46,9 @@ const useStyles = makeStyles((theme) => ({
 
 const SupportPage = (props) => {
   const classes = useStyles();
-  const matchesMD = useMediaQuery(theme.breakpoints.down("md"));
-  const matchesSM = useMediaQuery(theme.breakpoints.down("sm"));
-  const matchesXS = useMediaQuery(theme.breakpoints.down("xs"));
+  // const matchesMD = useMediaQuery(theme.breakpoints.down("md"));
+  // const matchesSM = useMediaQuery(theme.breakpoints.down("sm"));
+  // const matchesXS = useMediaQuery(theme.breakpoints.down("xs"));
 
   return (
     <Grid container direction="row" style={{ marginTop: "-0.5rem" }}>

@@ -90,5 +90,37 @@ export default createMuiTheme({
         color: "white"
       }
     },
+    MuiPaper:{
+      root:{
+        backgroundColor: ming,
+      }
+    },
+    MuiTablePagination:{
+      caption: {
+        color: "white",
+      },
+    },
+    MuiCheckbox: {
+      root:{
+        color: "white",
+      },
+    },
+    MuiDataGrid:{
+      root:{
+        "& *":{
+          fill:"white",
+        },
+      },
+    },
+    MuiDataGridPanel: {
+      root:{
+        backgroundColor: ming,
+      }
+    },
+    // MuiMenuItem:{
+    //   root:{
+    //     color: "black"
+    //   }
+    // },
   },
 });

@@ -11,6 +11,7 @@ import HomePage from "./pages/HomePage";
 import SupportPage from "./pages/SupportPage";
 import ProfilePage from "./pages/ProfilePage";
 import ScrollToTop from "./components/ui/ScrollToTop";
+import ExamsPage from "./pages/ExamsPage";
 
 const App = () => {
   const [tabsValue, setTabsValue] = useState(0);
@@ -33,7 +34,7 @@ const App = () => {
             <StudiesPage/>
           </Route>
           <Route path="/exams">
-            <h1>EXAMS PAGE</h1>
+            <ExamsPage/>
           </Route>
           <Route path="/courses">
             <h1>COURSES PAGE</h1>
