@@ -10,6 +10,7 @@ import {CssBaseline} from "@material-ui/core";
 import HomePage from "./pages/HomePage";
 import SupportPage from "./pages/SupportPage";
 import ProfilePage from "./pages/ProfilePage";
+import ScrollToTop from "./components/ui/ScrollToTop";
 
 const App = () => {
   const [tabsValue, setTabsValue] = useState(0);
@@ -19,6 +20,7 @@ const App = () => {
     <ThemeProvider theme={theme}>
       <CssBaseline/>
       <BrowserRouter>
+        <ScrollToTop>
         <Header tabsValue={tabsValue} setTabsValue={setTabsValue} selectedIndex={selectedIndex} setSelectedIndex={setSelectedIndex} />
         <Switch>
           <Route exact path="/">
@@ -44,6 +46,7 @@ const App = () => {
           </Route>
         </Switch>
         <Footer setTabsValue={setTabsValue} setSelectedIndex={setSelectedIndex}/>
+          </ScrollToTop>
       </BrowserRouter>
     </ThemeProvider>
   );

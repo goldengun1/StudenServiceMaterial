@@ -15,6 +15,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundImage: `url(${topBlockImage})`,
     backgroundSize: "cover",
     marginTop: "-0.5rem",
+    padding: "0 0 0 20px",
     [theme.breakpoints.down("xs")]: {
       marginTop: "0.5rem",
     },
@@ -28,6 +29,8 @@ const useStyles = makeStyles((theme) => ({
     backgroundImage: `url(${midBlockImage})`,
     backgroundSize: "cover",
     width: "100%",
+    minHeight: "30rem",
+    padding: "0 0 0 20px"
   },
   topAnimation: {
     maxHeight: "30rem",
