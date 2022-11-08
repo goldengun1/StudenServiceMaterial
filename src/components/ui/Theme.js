@@ -110,6 +110,12 @@ export default createMuiTheme({
         "& *":{
           fill:"white",
         },
+        "& .MuiDataGrid-columnsContainer":{
+          backgroundColor: ming
+        },
+      },
+      columnsContainer:{
+        backgroundColor: "white"
       },
     },
     MuiDataGridPanel: {
@@ -117,10 +123,25 @@ export default createMuiTheme({
         backgroundColor: ming,
       }
     },
-    // MuiMenuItem:{
-    //   root:{
-    //     color: "black"
-    //   }
-    // },
+    MuiSelect:{
+      select:{
+        "&:not([multiple]) option":{
+          backgroundColor: ming,
+        }
+      }
+    },
+    MuiSwitch:{
+      thumb:{
+        color: "white",
+      },
+      colorPrimary: {
+        "&$checked": {
+          "& + $track": {
+            backgroundColor: "#AAAAAA"
+          },
+        }
+      }
+    },
   },
 });
+// .MuiSwitch-colorPrimary.Mui-checked + .MuiSwitch-track

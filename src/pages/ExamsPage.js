@@ -1,11 +1,20 @@
 import { makeStyles } from "@material-ui/core/styles";
 import { Fragment } from "react";
-import { Typography } from "@material-ui/core";
-import { DataGrid } from "@material-ui/data-grid";
-// import { DataGrid } from "@material-ui/data-grid";
+import React from "react";
+import {FormControlLabel, FormGroup, Grid, Switch, Typography} from "@material-ui/core";
+import {DataGrid} from "@material-ui/data-grid";
+import theme from "../components/ui/Theme";
 
 const useStyles = makeStyles((theme) => ({
-
+  gridDataContainer: {
+    padding: "0 20px",
+    height: "50rem",
+    width: "1200px",
+    marginTop: "2rem",
+    [theme.breakpoints.down('md')]:{
+      width: "100%",
+    },
+  },
 }));
 
 const DUMMY_EXAMS = [
@@ -88,7 +97,7 @@ const columns = [
     headerName: "Points",
     description: "Points achieved on exam",
     sortable: true,
-    width: 120,
+    width: 130,
   },
   {
     field: "grade",
@@ -98,23 +107,40 @@ const columns = [
     width: 120,
   },
 ];
+
 console.log(new Date("2022-11-07T11:25:34").toLocaleString());
 
 const ExamsPage = (props) => {
   const classes = useStyles();
 
+
   return (
     <Fragment>
-      <Typography variant="h2">Exams</Typography>
-      <div style={{ height: 300}}>
-      <DataGrid
-        columns={columns}
-        rows={DUMMY_EXAMS}
-        pageSize={3}
-        checkboxSelection
-        disableSelectionOnClick
-      />
-      </div>
+      <Grid container direction="column" alignItems='center'>
+        <Grid item style={{ marginTop: "3rem" }}>
+          <Typography align='center' variant="h2">Exams</Typography>
+        </Grid>
+        <Grid item>
+          {/* switches for some actions */}
+          <FormGroup row style={{backgroundColor: theme.palette.common.ming, borderRadius:"5px"}}>
+            <FormControlLabel style={{ marginRight: "5rem", marginLeft: "5rem" }} control={<Switch color='primary' />} label='Valid'/>
+            <FormControlLabel style={{ marginRight: "5rem" }} control={<Switch color='primary' />} label='Valid'/>
+            <FormControlLabel style={{ marginRight: "5rem" }} control={<Switch color='primary' />} label='Valid'/>
+            <FormControlLabel style={{ marginRight: "5rem" }} control={<Switch color='primary' />} label='Valid'/>
+            <FormControlLabel style={{ marginRight: "5rem" }} control={<Switch color='primary' />} label='Valid'/>
+          </FormGroup>
+        </Grid>
+        <Grid item className={classes.gridDataContainer}>
+          <DataGrid
+            columns={columns}
+            rows={DUMMY_EXAMS}
+            pageSize={3}
+            checkboxSelection
+            disableSelectionOnClick
+            autoHeight
+          />
+        </Grid>
+      </Grid>
     </Fragment>
   );
 };
