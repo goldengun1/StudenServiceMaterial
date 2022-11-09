@@ -1,5 +1,5 @@
 import {
-  Button,
+  Button, CircularProgress,
   Grid,
   Paper,
   TextField,
@@ -8,9 +8,11 @@ import {
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import background from "../assets/images/AI_Network_Background.jpg";
-import React, { Fragment, useState } from "react";
+import React, {Fragment, useContext, useRef, useState} from "react";
 import logo from "../assets/images/logo-white.png";
 import theme from "../components/ui/Theme";
+import AuthContext from "../context/auth-context";
+import {useHistory} from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   backdrop: {
@@ -21,10 +23,10 @@ const useStyles = makeStyles((theme) => ({
     minHeight: "55rem",
     zIndex: "-10",
     marginTop: "-7px",
-    [theme.breakpoints.down("xs")]:{
+    [theme.breakpoints.down("xs")]: {
       marginTop: "-1.5rem",
       minHeight: "38rem",
-    }
+    },
   },
   logo: {
     marginTop: "3rem",
@@ -42,11 +44,11 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   form: {
-    backgroundColor: "#00000033",
+    backgroundColor: "#00000044",
     maxWidth: "30rem",
     marginLeft: "auto",
     marginRight: "auto",
-    marginTop: "2rem",
+    marginTop: "10rem",
     borderRadius: "5px",
     // border: `1px solid ${theme.palette.common.cyan}`,
   },
@@ -67,9 +69,66 @@ const useStyles = makeStyles((theme) => ({
 
 const LoginPage = (props) => {
   const classes = useStyles();
+  const authContext = useContext(AuthContext);
+  const history = useHistory();
   const [login, setLogin] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
+  const usernameRef = useRef();
+  const emailRef = useRef();
+  const passwordRef = useRef();
 
   const matchesXS = useMediaQuery(theme.breakpoints.down("xs"));
+
+  const onSubmitFormHandler = (event) => {
+    event.preventDefault();
+    setIsLoading(true);
+
+    const UserName = usernameRef.current.value;
+    const EmailAddress = emailRef.current.value;
+    const Password = passwordRef.current.value;
+
+    let url;
+    if (login) {
+      url = "https://localhost:7225/api/accounts/login";
+    } else {
+      url = "https://localhost:7225/api/accounts/create";
+    }
+
+    fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        UserName,
+        EmailAddress,
+        Password,
+      }),
+    })
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          return response.json().then((data) => {
+            let errorMessage = "Auth Failed";
+            if (data && data.error && data.error.message) {
+              errorMessage = data.error.message;
+            }
+            throw new Error(errorMessage);
+          });
+        }
+      })
+      .then((responseData) => {
+        console.log(responseData);
+        authContext.login(responseData.token,responseData.expiration,UserName);
+        history.replace('/');
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+        setIsLoading(false);
+      });
+  };
 
   return (
     <Fragment>
@@ -94,10 +153,21 @@ const LoginPage = (props) => {
             </Grid>
             <Grid item container direction="column" spacing={1}>
               <Grid item>
-                <TextField id="username" label="Username" fullWidth />
+                <TextField
+                  id="username"
+                  label="Username"
+                  fullWidth
+                  inputProps={{ ref: usernameRef }}
+                />
               </Grid>
               <Grid item>
-                <TextField id="email" label="Email" type="email" fullWidth />
+                <TextField
+                  id="email"
+                  label="Email"
+                  type="email"
+                  fullWidth
+                  inputProps={{ ref: emailRef }}
+                />
               </Grid>
               <Grid item>
                 <TextField
@@ -105,6 +175,7 @@ const LoginPage = (props) => {
                   label="Password"
                   type="password"
                   fullWidth
+                  inputProps={{ ref: passwordRef }}
                 />
               </Grid>
             </Grid>
@@ -114,9 +185,13 @@ const LoginPage = (props) => {
               justify="center"
               style={{ marginTop: "1.5rem" }}
             >
-              <Button className={classes.submit}>
+              {isLoading ? <CircularProgress color='secondary'/> : <Button
+                className={classes.submit}
+                type="submit"
+                onClick={onSubmitFormHandler}
+              >
                 {login ? "Log In" : "Sign Up"}
-              </Button>
+              </Button>}
             </Grid>
             <Grid
               item

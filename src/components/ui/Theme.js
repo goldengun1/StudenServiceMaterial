@@ -114,9 +114,6 @@ export default createMuiTheme({
           backgroundColor: ming
         },
       },
-      columnsContainer:{
-        backgroundColor: "white"
-      },
     },
     MuiDataGridPanel: {
       root:{
