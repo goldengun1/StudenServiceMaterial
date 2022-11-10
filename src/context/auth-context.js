@@ -4,8 +4,8 @@ const AuthContext = React.createContext({
   token: "",
   isLoggedIn: false,
   id: null,
-  login: (token, expirationTime,Username) => {},
-  logut: () => {},
+  login: (token, expirationTime, userName) => {},
+  logout: () => {},
 });
 
 let tokenRenewTimer;
@@ -38,6 +38,7 @@ export const AuthContextProvider = (props) => {
 
   const logoutHandler = useCallback(() => {
     setToken(null);
+    clearTimeout(tokenRenewTimer);
     localStorage.removeItem("token");
     localStorage.removeItem("expirationTime");
     localStorage.removeItem("id");
@@ -62,21 +63,22 @@ export const AuthContextProvider = (props) => {
       })
       .then((data) => {
         console.log("TOKEN RENEWED");
-        setToken(data.token);
         localStorage.setItem("token", data.token);
         localStorage.setItem("expirationTime", data.expiration);
+        setToken(data.token);
       });
   }, [token]);
 
-  const loginHandler = (token, expirationTime, id) => {
-    setToken(token);
-    localStorage.setItem("token", token);
+  const loginHandler = (tokenparam, expirationTime, id) => {
+    localStorage.setItem("token", tokenparam);
     localStorage.setItem("expirationTime", expirationTime);
     localStorage.setItem("id", id);
+    setToken(tokenparam);
   };
 
   useEffect(() => {
-    if (tokenData) {
+    if (tokenData.token) {
+      // console.log(tokenData);
       tokenRenewTimer = setTimeout(
         renewTokenHandler,
         tokenData.duration - 5000
@@ -94,7 +96,7 @@ export const AuthContextProvider = (props) => {
         isLoggedIn: usrIsLoggedIn,
         id: userId,
         login: loginHandler,
-        logut: logoutHandler,
+        logout: logoutHandler,
       }}
     >
       {props.children}

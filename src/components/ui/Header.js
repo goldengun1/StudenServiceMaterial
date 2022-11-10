@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, {useContext, useEffect, useState} from "react";
 import {
   AppBar,
   Button,
@@ -21,6 +21,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 import { Fragment } from "react";
 import logo from "../../assets/images/logo-white.png";
 import { Link } from "react-router-dom";
+import AuthContext from "../../context/auth-context";
 
 function ElevationScroll(props) {
   const { children, window } = props;
@@ -132,10 +133,26 @@ const useStyles = makeStyles((theme) => ({
     height: "50px",
     width: "50px",
   },
+  logoutBtn:{
+    width: "10rem",
+    height: "1rem",
+    backgroundColor: "wheat",
+    borderRadius: "25px",
+    fontFamily: "Aldrich",
+    padding: "25px",
+    border: `1px solid wheat`,
+
+    margin: "2rem 1.5rem 0 1rem",
+    "&:hover": {
+      border: `1px solid ${theme.palette.common.cyan}`,
+      color: "white",
+    },
+  },
 }));
 
 const Header = (props) => {
   //STATES
+  const authCtx = useContext(AuthContext);
   const [menuIsOpen, setMenuIsOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const [drawerIsOpen, setDrawerIsOpen] = useState(false);
@@ -166,6 +183,12 @@ const Header = (props) => {
     setMenuIsOpen(false);
     setSelectedIndex(index);
     setTabsValue(1);
+  };
+
+  const logoutHandler = (event) => {
+    event.preventDefault();
+    authCtx.logout();
+
   };
 
   //ARRAY_VARS
@@ -332,7 +355,7 @@ const Header = (props) => {
         />
       </Tabs>
       {/*TODO: maybe some button for some action*/}
-      {/*dropdown menue for studies tab*/}
+      <Button className={classes.logoutBtn} onClick={logoutHandler}>Log Out</Button>
       <Menu
         id="studies-menu"
         open={menuIsOpen}

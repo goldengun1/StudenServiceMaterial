@@ -100,9 +100,9 @@ const LoginPage = (props) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        UserName,
-        EmailAddress,
-        Password,
+        userName: UserName,
+        emailAddress: EmailAddress,
+        password: Password,
       }),
     })
       .then((response) => {

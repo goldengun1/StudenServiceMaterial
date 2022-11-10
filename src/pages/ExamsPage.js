@@ -175,7 +175,6 @@ const columns = [
   },
 ];
 
-console.log(new Date("2022-11-07T11:25:34").toLocaleString());
 
 const ExamsPage = (props) => {
   const classes = useStyles();
@@ -243,7 +242,6 @@ const ExamsPage = (props) => {
     const fiteredExams = rows.filter(
       (ex) => !selectionModel.selectionModel.includes(ex.id)
     );
-    console.log(fiteredExams);
     setRows(fiteredExams);
     setSelectionModel([]);
   };

@@ -67,6 +67,7 @@ const useStyles = makeStyles((theme) => ({
 const StudiesPage = (props) => {
   const classes = useStyles();
   const matchesMD = useMediaQuery(theme.breakpoints.down("md"));
+  const matchesXS = useMediaQuery(theme.breakpoints.down("xs"));
 
   const defaultOptions = {
     loop: true,
@@ -104,8 +105,8 @@ const StudiesPage = (props) => {
             style={{ height: "100%", padding: "0 15px" }}
             justify="center"
           >
-            <Grid item style={{ marginBottom: "2rem" }}>
-              <Typography variant="h3">
+            <Grid item style={{ marginBottom: "2rem", marginTop: matchesXS ? "1.5rem":undefined }}>
+              <Typography align={matchesXS ? "center" : undefined} variant="h3">
                 Stay updated with your studies
               </Typography>
             </Grid>
@@ -158,7 +159,7 @@ const StudiesPage = (props) => {
               <Typography variant="h3">Courses</Typography>
             </Grid>
             <Grid item>
-              <Typography paragraph align="center" variant="body1">
+              <Typography paragraph  variant="body1">
                 Organization is the key to success.
               </Typography>
             </Grid>

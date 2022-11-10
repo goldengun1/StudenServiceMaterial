@@ -17,7 +17,8 @@ import AuthContext from "./context/auth-context";
 const App = () => {
   const [tabsValue, setTabsValue] = useState(0);
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const { isLoggedIn } = useContext(AuthContext);
+  const authContext = useContext(AuthContext);
+  const { isLoggedIn } = authContext;
 
   return (
     <ThemeProvider theme={theme}>
@@ -44,14 +45,7 @@ const App = () => {
               )}
             </Route>
             <Route exact path="/login">
-              {isLoggedIn ? (
-                <HomePage
-                  setTabsValue={setTabsValue}
-                  setSelectedIndex={setSelectedIndex}
-                />
-              ) : (
-                <LoginPage />
-              )}
+              {isLoggedIn ? <Redirect to="/" /> : <LoginPage />}
             </Route>
             <Route path="/studies">
               {isLoggedIn ? (
@@ -83,7 +77,7 @@ const App = () => {
                   setSelectedIndex={setSelectedIndex}
                 />
               ) : (
-                <Redirect to='/login'/>
+                <Redirect to="/login" />
               )}
             </Route>
             <Route path="/support">
@@ -93,7 +87,7 @@ const App = () => {
                   setSelectedIndex={setSelectedIndex}
                 />
               ) : (
-                <Redirect to='/login'/>
+                <Redirect to="/login" />
               )}
             </Route>
           </Switch>
